@@ -5,7 +5,7 @@
                 <div class="card card-default">
                     <div class="card-header">Home</div>
                     <div class="card-body">
-                        <h2>{{ welcome }}</h2>
+                        <h2></h2>
                     </div>
                 </div>
             </div>
@@ -17,9 +17,7 @@
     export default {
         name: 'home',
         computed:{
-            welcome(){
-                return this.$store.getters.welcome;
-            }
+            
         }
     }
 </script>
