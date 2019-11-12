@@ -7,18 +7,18 @@
 					<form @submit.prevent="authenticate" autocomplete="off">
 						<div class="form-group row">
 							<label for="email">Email:</label>
-							<input type="email" v-model="form.email" class="form-control" placeholder="Email Address">
+							<input type="email" v-model="form.email" class="form-control" placeholder="Email Address" autocomplete="off">
 						</div>
 						<div class="form-group row">
 							<label for="password">Password:</label>
-							<input type="password" v-model="form.password" class="form-control" placeholder="Password">
+							<input type="password" v-model="form.password" class="form-control" placeholder="Password" autocomplete="off">
 						</div>
 						<div class="form-group row">
-							<input type="submit" value="Login">
+							<input type="submit" class="btn btn-primary btn-block btn-flat" value="Login">
 						</div>
-						<div class="form-group row">
+						<div class="form-group row" v-if="authError">
                             <p class="error">
-                                
+                                {{ authError }}
                             </p>
                         </div>
 					</form>
@@ -55,10 +55,18 @@
                     this.$store.commit("loginFailed", {error});
                 });
             }
+        },
+        computed:{
+        	authError(){
+        		return this.$store.getters.authError;
+        	}
         }
 	}
 </script>
 
 <style scoped>
-
+    .error {
+        text-align: center;
+        color: red;
+    }
 </style>

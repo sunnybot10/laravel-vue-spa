@@ -58,7 +58,13 @@ export default {
             context.commit("login");
         },
         getCustomers(context) {
-
+            axios.get('/api/customers')
+            .then((response)=>{
+                context.commit('updateCustomers', response.data.customers);
+            })
+            .catch((error)=>{
+                console.log(error);
+            })
         }
     }
 };
