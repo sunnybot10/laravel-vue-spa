@@ -24,7 +24,7 @@ class CreateCustomerRequest extends FormRequest
     public function rules()
     {
         return [
-             "first_name" => "required|min:3",
+            "first_name" => "required|min:3",
             "last_name" => "required|min:3",
             "email" => "required|email",
             "phone" => "required|min:10|numeric"
