@@ -22,7 +22,7 @@
 			</div>
 
 			<div class="form-group">
-				<router-link to="/customers">Cancel</router-link>
+				<router-link to="/customer">Cancel</router-link>
 				<input type="submit" value="Create" class="btn btn-primary">
 			</div>
 		</form>
@@ -63,20 +63,19 @@
 
 				const constraints = this.getConstraints();
 				const errors = validate(this.$data.customer, constraints);
-
+				
 				if(errors){
 					this.errors = errors;
 					return;	
 				}
 
-				axios.post('/api/customers/new', this.$data.customer)
+				axios.post('/api/customer/create', this.$data.customer)
 				.then((response)=>{
-					this.$router.push('/customers');
+					this.$router.push('/customer');
 				})
 				.catch((error)=>{
 					console.log(error);
 				})
-
 			},
 			getConstraints(){
 				return {
@@ -113,9 +112,9 @@
 </script>
 
 <style>
-.errors {
-    background: lightcoral;
-    border-radius:5px;
-    padding: 21px 0 2px 0;
-}
+	.errors {
+	    background: lightcoral;
+	    border-radius:5px;
+	    padding: 21px 0 2px 0;
+	}
 </style>

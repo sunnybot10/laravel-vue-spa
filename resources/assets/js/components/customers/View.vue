@@ -38,7 +38,7 @@
             if (this.customers.length) {
                 this.customer = this.customers.find((customer) => customer.id == this.$route.params.id);
             } else {
-                axios.get(`/api/customers/${this.$route.params.id}`)
+                axios.get(`/api/customer/${this.$route.params.id}`)
                 .then((response) => {
                     this.customer = response.data.customer
                 });

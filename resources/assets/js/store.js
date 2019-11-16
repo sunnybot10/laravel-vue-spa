@@ -58,7 +58,7 @@ export default {
             context.commit("login");
         },
         getCustomers(context) {
-            axios.get('/api/customers')
+            axios.get('/api/customer/all')
             .then((response)=>{
                 context.commit('updateCustomers', response.data.customers);
             })

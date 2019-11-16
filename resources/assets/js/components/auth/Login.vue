@@ -16,12 +16,12 @@
 						<div class="form-group row">
 							<input type="submit" class="btn btn-primary btn-block btn-flat" value="Login">
 						</div>
-						<div class="form-group row" v-if="authError">
-                            <p class="error">
-                                {{ authError }}
-                            </p>
-                        </div>
-					</form>
+                    </form>
+					<div class="errors" v-if="authError">
+                        <p class="text-center">
+                            {{ authError }}
+                        </p>
+                    </div>
 				</div>
 			</div>
 		</div>
@@ -65,8 +65,9 @@
 </script>
 
 <style scoped>
-    .error {
-        text-align: center;
-        color: red;
+    .errors {
+        background: lightcoral;
+        border-radius:5px;
+        padding: 21px 0 2px 0;
     }
 </style>
