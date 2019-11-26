@@ -8,6 +8,6 @@
 
 <script>
 	export default{
-		name: 'customer-main'
+		name: 'members-main'
 	}
 </script>

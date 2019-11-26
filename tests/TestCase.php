@@ -13,10 +13,13 @@ abstract class TestCase extends BaseTestCase
     protected function authenticate()
     {
         $user = User::create([
-            'name'                  => 'Test User',
-            'email'                 => 'test@gmail.com',
-            'password_confirmation' => 'secret1234',
-            'password'              => Hash::make('secret1234'),
+            'name'          => 'Test User',
+            'email'         => 'Matholeadds@gmail.com',
+            'password'      => Hash::make('secret1234'),
+            'role'          => 'Admin',
+            'status'        => 'InActive',
+            'bio'           => "Neon tube-space plastic media-ware augmented reality boat woman. Geodesic assault decay numinous Shibuya drugs carbon stimulate franchise boat claymore mine. Nodal point saturation point pistol meta-numinous-ware boy modem sensory faded kanji 8-bit neon film advert j-pop pre.",
+            'photo'         => '.jpg',
         ]);
         $token = JWTAuth::fromUser($user);
         return $token;

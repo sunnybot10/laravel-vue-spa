@@ -8,7 +8,9 @@ export default {
         isLoggedIn: !!user,
         loading: false,
         auth_error: null,
-        customers: []
+        customers: [],
+        users: [],
+        products:[],
     },
     getters: {
         isLoading(state) {
@@ -25,6 +27,12 @@ export default {
         },
         customers(state) {
             return state.customers;
+        },
+        users(state) {
+            return state.users;
+        },
+        products(state) {
+            return state.products;
         }
     },
     mutations: {
@@ -50,20 +58,44 @@ export default {
             state.currentUser = null;
         },
         updateCustomers(state, payload) {
-            state.customers = payload;
+            state.customers = payload.data;
+        },
+        updateUsers(state, payload) {
+            state.users = payload;
+        },
+        updateProducts(state, payload) {
+            state.products = payload;
         }
     },
     actions: {
         login(context) {
             context.commit("login");
         },
-        getCustomers(context) {
-            axios.get('/api/customer/all')
+        getCustomers(context, page) {
+            axios.get('api/customer/all')
             .then((response)=>{
-                context.commit('updateCustomers', response.data.customers);
+                context.commit('updateCustomers', response.data);
             })
             .catch((error)=>{
-                console.log(error);
+
+            })
+        },
+        getProducts(context) {
+            axios.get('/api/product/all')
+            .then((response)=>{
+                context.commit('updateProducts', response.data.product);
+            })
+            .catch((error)=>{
+
+            })
+        },
+        getUsers(context, page) {
+            axios.get('/api/user/all?page=' + page)
+            .then((response)=>{
+                context.commit('updateUsers', response.data);
+            })
+            .catch((error)=>{
+
             })
         }
     }

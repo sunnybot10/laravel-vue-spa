@@ -53,7 +53,6 @@ class AuthController extends Controller
 
         return response()->json(compact('access_token'), 200); 
     }
-
     public function me()
     {
         return response()->json($this->guard('api')->user());
@@ -77,7 +76,7 @@ class AuthController extends Controller
             'access_token'  => $token,
             'user'          => $this->guard()->user(),
             'token_type'    => 'bearer',
-            'expires_in'    => $this->guard('api')->factory()->getTTL() * 60
+            'expires_in'    => $this->guard('api')->factory()->getTTL() * 60 * 60
         ]);
     }
 

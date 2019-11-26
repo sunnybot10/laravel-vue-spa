@@ -20,7 +20,7 @@ class CustomerManagementTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '. $token,
-        ])->json('post', route('customer.create'), $this->data());
+        ])->json('POST', route('customer.create'), $this->data());
 
         $response->assertStatus(200);
         $count = Customer::where('email','Matholeas@gmail.com')->first()->count();
@@ -37,12 +37,12 @@ class CustomerManagementTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '. $token,
-        ])->json('get',route('customer.all'));
+        ])->json('GET',route('customer.all'));
 
         $response->assertStatus(200);
 
         $this->assertEquals(1,count($response->json()));
-        $this->assertEquals('Sunnyboy',$response->json()['customers'][0]['first_name']);
+        $this->assertEquals('Sunnyboy Mathole',$response->json()['customers'][0]['name']);
     }
 
     /** @test */
@@ -55,12 +55,12 @@ class CustomerManagementTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '. $token,
-        ])->json('post',route('customer.update',['customer' => $customer->id]),
-        ['first_name' => 'Tumi']);
+        ])->json('PUT',route('customer.update',['customer' => $customer->id]),
+        array_merge($this->data(),['name' => 'Tumi Mathole']));
 
         $response->assertStatus(200);
 
-        $this->assertEquals('Tumi', Customer::first()->first_name);
+        $this->assertEquals('Tumi Mathole', Customer::first()->name);
     }
 
     /** @test */
@@ -74,7 +74,7 @@ class CustomerManagementTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '. $token,
-        ])->json('get',route('customer.show',['customer' => $customer->id]));
+        ])->json('GET',route('customer.show',['customer' => $customer->id]));
 
         $response->assertStatus(200);
 
@@ -90,7 +90,7 @@ class CustomerManagementTest extends TestCase
 
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '. $token,
-        ])->json('post',route('customer.delete',['customer' => $customer->id]));
+        ])->json('POST',route('customer.delete',['customer' => $customer->id]));
 
         $response->assertStatus(200);
         $this->assertEquals(0, Customer::count());
@@ -99,10 +99,11 @@ class CustomerManagementTest extends TestCase
     private function data()
     {
         return [
-            'first_name'    => 'Sunnyboy',
-            'last_name'     => 'Mathole',
-            'email'         => 'Matholeas@gmail.com',
-            'phone'         => '0718296512',
+            'name'      => 'Sunnyboy Mathole',
+            'email'     => 'Matholeas@gmail.com',
+            'phone'     => '0718296512',
+            'address'   =>'F304 Walmer Street Khayelitsha 7784',
+            'birthday'  => '1987-10-22',
         ];
     }
 }

@@ -1,11 +1,12 @@
 
 window._ = require('lodash');
+window.Popper = require('popper.js').default;
 
 try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
-    //require('admin-lte');
+    require('admin-lte'); // Include AdminLTE
 } catch (e) {}
 
 window.axios = require('axios');
